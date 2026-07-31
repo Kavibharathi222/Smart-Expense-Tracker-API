@@ -172,7 +172,7 @@ Example:
 {
     "id": 1,
     "title": "Lunch",
-    "amount": 250,
+    "amount": 250.0,
     "category": "Food",
     "date": "2026-07-31"
 }
