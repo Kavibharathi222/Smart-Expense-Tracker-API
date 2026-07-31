@@ -228,31 +228,6 @@ All tests were executed successfully using Pytest before submission.
 
 ---
 
-# Design Decisions
 
-- FastAPI was selected for its simplicity, performance, and automatic API documentation.
-- A JSON file was used instead of a database because the assignment explicitly allowed local file storage.
-- Pydantic models provide automatic validation without requiring manual input checks.
-- Pytest and FastAPI's TestClient were used to create automated endpoint tests.
 
----
 
-# Future Improvements
-
-Possible enhancements include:
-
-- Update Expense endpoint (PUT)
-- Search expenses by title
-- Monthly expense summary
-- User authentication
-- Database integration (SQLite/PostgreSQL)
-- Docker containerization
-- Expense analytics and visualization
-
----
-
-# Author
-
-Developed as part of the **Apprentice Assignment** using Python, FastAPI, and Pytest.
-
-The project demonstrates REST API development, request validation, automated testing, JSON-based data management, and clean API design.
