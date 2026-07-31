@@ -69,7 +69,7 @@ git clone <repository-url>
 ## Step 2: Navigate to the Project Directory
 
 ```bash
-cd your-repo
+cd Smart-Expense-Tracker-API
 ```
 
 ## Step 3: Install the Required Dependencies
