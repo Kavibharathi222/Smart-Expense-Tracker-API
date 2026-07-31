@@ -46,7 +46,6 @@ your-repo/
 ├── README.md
 ├── AI_NOTES.md
 ├── requirements.txt
-├── Dockerfile
 │
 ├── src/
 │   ├── __init__.py
