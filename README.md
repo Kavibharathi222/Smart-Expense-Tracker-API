@@ -2,32 +2,43 @@
 
 ## Overview
 
-This project is a REST API built using **FastAPI** to manage personal expenses. It stores expense data in a local JSON file and supports basic CRUD operations.
+The **Smart Expense Tracker API** is a RESTful web service developed using **FastAPI** that helps users manage their personal expenses efficiently. The application allows users to create, view, filter, calculate, and delete expense records while storing all data in a local JSON file. No external database is required, making the application lightweight, easy to set up, and suitable for learning REST API development.
 
-## Features
+This project demonstrates the implementation of RESTful API principles, request validation, automated testing, and JSON-based data persistence using Python.
+
+---
+
+# Features
+
+The API provides the following functionalities:
 
 - Add a new expense
-- View all expenses
+- View all recorded expenses
 - Filter expenses by category
-- Calculate total expenses
-- Calculate total expenses by category
-- Delete an expense
+- Calculate the total amount of all expenses
+- Calculate category-wise expense totals
+- Delete an expense by ID
 - Automatic request validation using Pydantic
+- JSON-based data storage (No database required)
+- Interactive Swagger UI documentation
 - Automated API testing using Pytest
 
 ---
 
-## Tech Stack
+# Technology Stack
 
-- Python 3.10+
-- FastAPI
-- Uvicorn
-- Pydantic
-- Pytest
+The project was built using the following technologies:
+
+- **Programming Language:** Python 3.10+
+- **Framework:** FastAPI
+- **ASGI Server:** Uvicorn
+- **Data Validation:** Pydantic
+- **Testing Framework:** Pytest
+- **Storage:** Local JSON File
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 your-repo/
@@ -35,6 +46,7 @@ your-repo/
 ├── README.md
 ├── AI_NOTES.md
 ├── requirements.txt
+├── Dockerfile
 │
 ├── src/
 │   ├── __init__.py
@@ -47,21 +59,21 @@ your-repo/
 
 ---
 
-## Installation
+# Installation
 
-Clone the repository
+## Step 1: Clone the Repository
 
 ```bash
 git clone <repository-url>
 ```
 
-Navigate to the project directory
+## Step 2: Navigate to the Project Directory
 
 ```bash
 cd your-repo
 ```
 
-Install dependencies
+## Step 3: Install the Required Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -69,88 +81,183 @@ pip install -r requirements.txt
 
 ---
 
-## Start the Server
+# Starting the Server
 
-Run the FastAPI application using:
+Start the FastAPI application using Uvicorn:
 
 ```bash
-uvicorn src.main:app --reload 
+uvicorn src.main:app --reload
 ```
 
-The application will be available at:
+After the server starts successfully, the API will be available at:
 
 ```
 http://127.0.0.1:8000
 ```
 
-Swagger Documentation:
+---
+
+# API Documentation
+
+FastAPI automatically generates interactive API documentation.
+
+Swagger UI:
 
 ```
 http://127.0.0.1:8000/docs
 ```
 
+Alternative ReDoc documentation:
+
+```
+http://127.0.0.1:8000/redoc
+```
+
+These interfaces allow users to test every endpoint directly from the browser without requiring Postman.
+
 ---
 
-## Run the Test Suite
+# Running the Test Suite
 
-Execute the following command:
+This project includes automated API tests written using **Pytest**.
+
+Run all tests:
 
 ```bash
 pytest
 ```
 
-or for detailed output:
+Run tests with verbose output:
 
 ```bash
 pytest -v
 ```
 
+Display print statements during testing:
+
+```bash
+pytest -v -s
+```
+
 ---
 
-## API Endpoints
+# Available API Endpoints
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
-| GET | `/` | Welcome API |
-| POST | `/post-expenses` | Add Expense |
-| GET | `/Get-expenses` | View All Expenses |
-| GET | `/expenses/category/{category}` | Filter by Category |
-| GET | `/expenses/total` | Total Expenses |
-| GET | `/expenses/total/{category}` | Category Total |
-| DELETE | `/expenses/{expense_id}` | Delete Expense |
+| GET | `/` | Welcome endpoint |
+| POST | `/post-expenses` | Add a new expense |
+| GET | `/Get-expenses` | Retrieve all expenses |
+| GET | `/expenses/category/{category}` | Retrieve expenses by category |
+| GET | `/expenses/total` | Calculate overall expenses |
+| GET | `/expenses/total/{category}` | Calculate category-wise expenses |
+| DELETE | `/expenses/{expense_id}` | Delete an expense using its ID |
 
 ---
 
-## Validation
+# Data Storage
 
-The API uses **Pydantic** for request validation.
+Expense records are stored inside a local JSON file named:
 
-Invalid requests automatically return:
+```
+expenses.json
+```
 
-- **422 Unprocessable Entity**
+Each expense contains:
 
-Examples include:
+- Expense ID
+- Title
+- Amount
+- Category
+- Date
+
+Example:
+
+```json
+{
+    "id": 1,
+    "title": "Lunch",
+    "amount": 250,
+    "category": "Food",
+    "date": "2026-07-31"
+}
+```
+
+---
+
+# Request Validation
+
+The application uses **Pydantic** models for automatic request validation.
+
+The following validations are performed automatically:
+
+- Required fields must be present.
+- Amount must be a valid numeric value.
+- Date must follow the `YYYY-MM-DD` format.
+- Invalid request bodies return appropriate validation errors.
+
+Example HTTP status codes:
+
+| Status Code | Meaning |
+|-------------|---------|
+| 200 | Successful request |
+| 404 | Resource not found |
+| 422 | Invalid request or validation error |
+
+---
+
+# Testing
+
+The project contains comprehensive automated tests covering both positive and negative scenarios.
+
+### Positive Test Cases
+
+- Home endpoint
+- Add expense
+- Retrieve all expenses
+- Filter expenses by category
+- Calculate total expenses
+- Calculate category totals
+- Delete an expense
+
+### Negative Test Cases
 
 - Missing required fields
 - Invalid data types
-- Invalid date format
+- Invalid delete ID
+- Invalid category
+- Validation errors
+- Non-existent resources
+
+All tests were executed successfully using Pytest before submission.
 
 ---
 
-## Testing
+# Design Decisions
 
-The project includes automated tests for:
-
-- Home Endpoint
-- Add Expense
-- Get All Expenses
-- Filter by Category
-- Total Expenses
-- Category Total
-- Delete Expense
-- Validation Errors
-- Invalid Category
-- Invalid Delete ID
+- FastAPI was selected for its simplicity, performance, and automatic API documentation.
+- A JSON file was used instead of a database because the assignment explicitly allowed local file storage.
+- Pydantic models provide automatic validation without requiring manual input checks.
+- Pytest and FastAPI's TestClient were used to create automated endpoint tests.
 
 ---
 
+# Future Improvements
+
+Possible enhancements include:
+
+- Update Expense endpoint (PUT)
+- Search expenses by title
+- Monthly expense summary
+- User authentication
+- Database integration (SQLite/PostgreSQL)
+- Docker containerization
+- Expense analytics and visualization
+
+---
+
+# Author
+
+Developed as part of the **Apprentice Assignment** using Python, FastAPI, and Pytest.
+
+The project demonstrates REST API development, request validation, automated testing, JSON-based data management, and clean API design.
