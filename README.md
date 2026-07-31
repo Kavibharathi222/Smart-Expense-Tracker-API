@@ -133,11 +133,6 @@ Run tests with verbose output:
 pytest -v
 ```
 
-Display print statements during testing:
-
-```bash
-pytest -v -s
-```
 
 ---
 
