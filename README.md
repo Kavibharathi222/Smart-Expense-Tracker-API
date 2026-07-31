@@ -51,7 +51,7 @@ your-repo/
 │   ├── __init__.py
 │   └── main.py
 │
-└── tests/
+└── test/
     ├── __init__.py
     └── test_api.py
 ```
